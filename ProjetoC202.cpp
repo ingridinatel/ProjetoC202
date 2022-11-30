@@ -37,7 +37,6 @@ void LerArquivo(struct estados uf[]){
 
 int main (){
 	struct estados uf[26];
-	int i = 0;	
 	
 	LerArquivo(uf);
 	
