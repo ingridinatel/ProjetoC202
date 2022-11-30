@@ -6,7 +6,10 @@ using namespace std;
 
 struct estados{
 	char sigla[2];
-	double km;	
+	float km;
+	char nomeEstado[50];
+	char capital[100];
+	float valorFixo;	
 };
 
 void LerArquivo(struct estados uf[]){
@@ -15,8 +18,16 @@ void LerArquivo(struct estados uf[]){
 	//Abrindo o arquvio para leitura 
 	arq.open("estados.txt", ifstream::in);
 	for (i = 0; i < 26; i++){
+		//Armazenando a sigla
 		arq >> uf[i].sigla;
-		arq >> uf[i].km; 		
+		//Armazenando o km
+		arq >> uf[i].km; 
+		//Armazenando o nome
+		arq >> uf[i].nomeEstado;
+		//Armazenando o capital
+		arq >> uf[i].capital;
+		//Armazenando o valor fixo
+		arq >> uf[i].valorFixo;		
 	}
 	//Fechando o arquivo 
 	arq.close();
@@ -26,14 +37,9 @@ void LerArquivo(struct estados uf[]){
 
 int main (){
 	struct estados uf[26];
-	int i = 0;
-	
+	int i = 0;	
 	
 	LerArquivo(uf);
-	for (i = 0; i < 26; i++){
-		cout << uf[i].sigla << endl;
-		cout << uf[i].km << endl; 		
-	}
 	
 	
 	
