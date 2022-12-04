@@ -1,0 +1,2 @@
+sigla km estado capital valorfixo
+AM 13000 AMAZONAS MANAUS 50
