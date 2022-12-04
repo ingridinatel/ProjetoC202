@@ -17,7 +17,7 @@ void LerArquivo(struct estados uf[]){
 	ifstream arq;
 	//Abrindo o arquvio para leitura 
 	arq.open("estados.txt", ifstream::in);
-	for (i = 0; i < 26; i++){
+	for (i = 0; i < 27; i++){
 		//Armazenando a sigla
 		arq >> uf[i].sigla;
 		//Armazenando o km
@@ -41,20 +41,19 @@ void LerArquivo(struct estados uf[]){
 	 return tempo;
  }
  
-int localizaposicao (char capital[26], estados uf[26]){
+int localizaposicao (char capital[100], struct estados uf[]){
 	int posicao;
-  
-	for (int i = 0; i < 3; i ++){
-		if (strcmp(capital, uf[i].capital)==0	){
-      posicao = i;	
+  	int i;
+	for (i = 0; i < 27; i ++){
+		if (strcmp(capital, uf[i].capital) == 0){
+			posicao = i;	
 		}
 	}
-
+	cout << "Test: " << posicao << endl;
 	return posicao;
 } 
 
 float calcub(float A, float L, float C){
-
 	float FC = 300;	
 	float cubagem;
 	
@@ -82,32 +81,33 @@ float logica_custo(float resultado, float KM){
 }
 
 int main(){
+    struct estados uf[26];
 	float altura;
 	float largura;
 	float comprimento;
 	float resultado_cubagem;
 	float resultado_frete;
 	float distancia;
-  struct estados uf[26];
 	int posicao;
-	char capital[50];
-	cin.getline(capital,50);
-	float horas;
-  LerArquivo(uf);
+	char capital[100];
+	float horas;	
+	
+    LerArquivo(uf);
+	
+	cin.getline(capital,100);
 	
 	cin >> altura >> largura >> comprimento;
 	cin >> distancia;
-  
-  posicao = localizaposicao(capital, uf);
+	
+    posicao = localizaposicao(capital, uf);
+    cout << "posicao: " << posicao << endl;
 	horas = calctemp(uf[posicao].km);
+	cout << "horas: " << horas << endl;
 
 	resultado_cubagem = calcub(altura, largura, comprimento);
+	cout << "Cugabem: "<< resultado_cubagem << endl;
 	resultado_frete = logica_custo(resultado_cubagem, uf[posicao].km);
-
-	cout << "Cugabem: "<< resultado << endl;
 	cout <<"Frete: "<< resultado_frete << endl;	
 	
-	cout << posicao << endl;
-	cout << horas;
 	return 0;	
 }
