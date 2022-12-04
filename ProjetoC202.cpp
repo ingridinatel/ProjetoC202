@@ -33,12 +33,12 @@ void LerArquivo(struct estados uf[]){
 	arq.close();
 }
 
- float calctemp(float distancia){
+ void calctemp(float distancia){
 	 float tempo;
    
 	 tempo = (distancia)/80.88;
 	 
-	 return tempo;
+	 cout << "Tempo de entrega: " << horas << "h" << endl;
  }
  
 int localizaposicao (char capital[100], struct estados uf[]){
@@ -87,27 +87,34 @@ int main(){
 	float comprimento;
 	float resultado_cubagem;
 	float resultado_frete;
-	float distancia;
 	int posicao;
 	char capital[100];
 	float horas;	
 	
     LerArquivo(uf);
 	
+	cout << "Digite a capital de destino: " ;
 	cin.getline(capital,100);
 	
-	cin >> altura >> largura >> comprimento;
-	cin >> distancia;
+	cout << "Digite a altura: ";
+	cin >> altura; 
+	cout << "Digite a largura: ";
+	cin >> largura;
+	cout << "Digite o comprimento: ";
+	cin >> comprimento;
 	
     posicao = localizaposicao(capital, uf);
-    cout << "posicao: " << posicao << endl;
-	horas = calctemp(uf[posicao].km);
-	cout << "horas: " << horas << endl;
-
+    
+	
 	resultado_cubagem = calcub(altura, largura, comprimento);
-	cout << "Cugabem: "<< resultado_cubagem << endl;
 	resultado_frete = logica_custo(resultado_cubagem, uf[posicao].km);
-	cout <<"Frete: "<< resultado_frete << endl;	
+	
+	cout << fixed << setprecision(2);
+	cout << "Sua compra foi concluida, veja abaixo as informacoes do seu pedido: " << endl;
+	cout << "Destino da entrega: " << uf[posicao].capital << " - " << uf[posicao].sigla << endl;
+	calctemp(uf[posicao].km);
+	cout << "Valor do frete: " << resultado_frete << endl;
+	cout << "Agradecemos a preferencia" << endl;
 	
 	return 0;	
 }
